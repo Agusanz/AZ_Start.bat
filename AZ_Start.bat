@@ -4,15 +4,14 @@ COLOR 0A
 mode con:cols=60 lines=2
 :: Variables::
 ::SteamCMD.exe path
-set STEAM_CMD_LOCATION="C:\SteamCMD"
+set STEAM_CMD_LOCATION="D:\Server\SteamCMD"
 set STEAM_USERNAME="anonymous"
 ::DayZServer_64.exe path
-set DAYZ-SA_SERVER_LOCATION="C:\DayZ-SA_server"
+set DAYZ-SA_SERVER_LOCATION="D:\Server\DayZ"
 ::Bec.exe path
-set BEC_LOCATION="C:\DayZ-SA_server\Bec"
+set BEC_LOCATION="D:\Server\DayZ\BEC"
 ::IMPORTANT: Modify line 70 to your correct parameters
 ::::::::::::::
-
 echo Agusanz
 goto checksv
 pause
@@ -54,7 +53,7 @@ timeout 1 >nul
 cls
 echo Updating DayZ SA Server...
 cd "%STEAM_CMD_LOCATION%"
-start /wait "" steamcmd.exe +login "%STEAM_USERNAME%" +force_install_dir %~dp0 +app_update 223350 validate +quit
+start /wait "" steamcmd.exe +force_install_dir %~dp0 +login "%STEAM_USERNAME%" +app_update 223350 validate +quit
 goto startsv
 
 :startsv
@@ -67,7 +66,7 @@ timeout 1 >nul
 cls
 echo Starting DayZ SA Server...
 cd "%DAYZ-SA_SERVER_LOCATION%"
-start DayZServer_x64.exe -config=serverDZ.cfg -port=2302 -profiles=C:\Users\%USER%\Documents\DayZ -dologs -adminlog -netlog -freezecheck -noFilePatching -BEpath=C:\DayZ-SA_server\battleye
+start DayZServer_x64.exe -config=serverDZ.cfg -port=2302 -profiles=D:\Server\DayZ\profiles -dologs -adminlog -netlog -freezecheck -noFilePatching -BEpath=D:\Server\DayZ\battleye -cpuCount= 8 -maxMem=4096 -limitFPS=200 "-mod=mods/@CF;mods/@Community-Online-Tools;mods/@MoreStamina;mods/@PlayerCounter;mods/@SIX-DayZ-Auto-Run;"
 FOR /L %%s IN (30,-1,0) DO (
 	cls
 	echo Initializing server, wait %%s seconds to initialize Bec.. 
